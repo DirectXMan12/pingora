@@ -16,6 +16,7 @@ use ouroboros::self_referencing;
 use pingora_error::Result;
 use pingora_rustls::CertificateDer;
 use std::hash::{Hash, Hasher};
+use std::sync::Arc;
 use x509_parser::prelude::{FromDer, X509Certificate};
 
 /// Get the organization and serial number associated with the given certificate
@@ -174,6 +175,11 @@ impl CertKey {
     /// Return the serial from the leaf certificate.
     pub fn serial(&self) -> String {
         get_serial(self.leaf()).unwrap()
+    }
+
+    /// convert this for use as a CaType
+    pub fn into_certs(self) -> Arc<[WrappedX509]> {
+        self.certificates.into()
     }
 }
 
