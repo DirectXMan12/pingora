@@ -323,7 +323,7 @@ impl ConnFdReusable for Path {
                         debug!("Unix FD to: {peer} is reusable");
                         true
                     } else {
-                        error!("Crit: unix FD mismatch: fd: {fd:?}, peer: {peer}, addr: {addr}",);
+                        debug!("Crit: unix FD mismatch: fd: {fd:?}, peer: {peer}, addr: {addr}",);
                         false
                     }
                 }
